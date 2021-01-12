@@ -9,6 +9,10 @@ import pers.adlered.mrphoto.core.database.realization.UpyunActionDatabase;
  * 1. 使用 setActionDatabaseTo...() 方法设定行为数据库
  * 2. 使用 getActionProcessor() 方法获得 ActionProcessor 对象，以进行指定图床的增删改查等操作，详情请参阅
  * @see pers.adlered.mrphoto.core.main.ActionProcessor
+ *
+ * 如要添加一个新的行为数据库：
+ * 1. 在 pers.adlered.mrphoto.core.database.realization 中添加一个新的类，并 implements ActionDatabase 进行重写
+ * 2. 在 pers.adlered.mrphoto.core.main.ActionExecutor 中添加 setActionDatabaseTo 开头的方法用于切换行为数据库
  */
 public class ActionExecutor {
 
