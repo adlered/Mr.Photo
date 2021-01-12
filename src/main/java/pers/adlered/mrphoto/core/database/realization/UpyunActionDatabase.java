@@ -55,4 +55,9 @@ public class UpyunActionDatabase implements ActionDatabase {
     public File download(String path, String filename) {
         return null;
     }
+
+    @Override
+    public String getURL(String path, String filename) {
+        return null;
+    }
 }

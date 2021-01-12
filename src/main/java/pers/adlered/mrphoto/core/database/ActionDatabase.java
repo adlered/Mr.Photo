@@ -25,5 +25,7 @@ public interface ActionDatabase {
     public boolean copy(String path, String filename, String newPath, String newFilename);
     // 下载文件
     public java.io.File download(String path, String filename);
+    // 提供一个可供预览的 HTTP URL 地址
+    public String getURL(String path, String filename);
 
 }
