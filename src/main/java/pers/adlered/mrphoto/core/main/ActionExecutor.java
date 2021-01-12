@@ -3,6 +3,13 @@ package pers.adlered.mrphoto.core.main;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
 import pers.adlered.mrphoto.core.database.realization.UpyunActionDatabase;
 
+/**
+ * ActionExecutor 是面向用户的类。
+ * 如要使用 Mr.Photo，请实例化 ActionExecutor 类，然后：
+ * 1. 使用 setActionDatabaseTo...() 方法设定行为数据库
+ * 2. 使用 getActionProcessor() 方法获得 ActionProcessor 对象，以进行指定图床的增删改查等操作，详情请参阅
+ * @see pers.adlered.mrphoto.core.main.ActionProcessor
+ */
 public class ActionExecutor {
 
     // ActionProcessor 必须由 ActionExecutor 进行实例化和控制
@@ -25,12 +32,11 @@ public class ActionExecutor {
 
     /**
      * 获取实例化的 ActionProcessor
-     * 除非有特殊需要，否则不建议调用该方法。
+     * 以进行文件操作。
      * @return 实例化后的 ActionProcessor
      */
     public ActionProcessor getActionProcessor() {
         return actionProcessor;
     }
-
 
 }

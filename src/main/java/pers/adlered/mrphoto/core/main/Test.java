@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        ActionExecutor actionExecutor = new ActionExecutor();
+        actionExecutor.setActionDatabaseToUpyun();
+        ActionProcessor actionProcessor = actionExecutor.getActionProcessor();
 
     }
 }
