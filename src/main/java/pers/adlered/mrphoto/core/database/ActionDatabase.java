@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public interface ActionDatabase {
 
+    // 字符串中以每个子类不同的格式要求传入需要的常量，比如用户名密码等
+    public void setVal(String val);
+
     // 创建指定文件或文件夹
     public boolean create(String path, String filename);
     // 删除指定文件或文件夹

@@ -3,13 +3,21 @@ package pers.adlered.mrphoto.core.database.realization;
 import pers.adlered.mrphoto.core.bean.Prop;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class UpyunActionDatabase implements ActionDatabase {
 
+    private String val;
+
+    @Override
+    public void setVal(String val) {
+        this.val = val;
+    }
+
     @Override
     public boolean create(String path, String filename) {
-        System.out.println("hello world");
+        System.out.println("val is: " + val);
         return false;
     }
 
@@ -19,7 +27,7 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public boolean upload(java.io.File file, String path, String filename) {
+    public boolean upload(File file, String path, String filename) {
         return false;
     }
 
@@ -44,7 +52,7 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public java.io.File download(String path, String filename) {
+    public File download(String path, String filename) {
         return null;
     }
 }

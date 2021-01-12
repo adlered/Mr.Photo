@@ -17,37 +17,16 @@ public class ActionProcessor {
     /**
      * 图床操作
      */
+
+    // 设置变量
+    public void setVal(String val) {
+        actionDatabase.setVal(val);
+    }
+
+    // 创建空文件/文件夹
     public boolean create(String path, String filename) {
-        System.out.println("hello world");
+        actionDatabase.create(path, filename);
         return false;
-    }
-
-    public boolean delete(String path, String filename) {
-        return false;
-    }
-
-    public boolean upload(File file, String path, String filename) {
-        return false;
-    }
-
-    public Prop prop(String path, String filename) {
-        return null;
-    }
-
-    public ArrayList<File[]> fetch(String path) {
-        return null;
-    }
-
-    public boolean move(String path, String filename, String newPath, String newFilename) {
-        return false;
-    }
-
-    public boolean copy(String path, String filename, String newPath, String newFilename) {
-        return false;
-    }
-
-    public File download(String path, String filename) {
-        return null;
     }
 
     /**

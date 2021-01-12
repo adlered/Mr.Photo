@@ -11,6 +11,7 @@ public class Test {
         ActionExecutor actionExecutor = new ActionExecutor();
         actionExecutor.setActionDatabaseToUpyun();
         ActionProcessor actionProcessor = actionExecutor.getActionProcessor();
-
+        actionProcessor.setVal("helloooooo");
+        actionProcessor.create("", "");
     }
 }
