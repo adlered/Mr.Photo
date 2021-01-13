@@ -9,7 +9,11 @@ public class Logger {
     private static String suffix = "";
 
     public static void info(String message) {
-        System.out.println(prefix + message + suffix);
+        System.out.println(prefix + " [INFO] " + message + suffix);
+    }
+
+    public static void warn(String message) {
+        System.out.println(prefix + " [FAIL] " +  message + suffix);
     }
 
     public static void setPrefix(String prefix) {

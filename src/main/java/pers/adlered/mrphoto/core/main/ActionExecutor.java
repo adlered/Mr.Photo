@@ -29,10 +29,14 @@ public class ActionExecutor {
      */
 
     // 又拍云行为数据库
-    public void setActionDatabaseToUpyun() throws InstantiationException, IllegalAccessException {
+    public void setActionDatabaseToUpyun() {
         ActionDatabase actionDatabase = new UpyunActionDatabase();
-        loadActionDatabase(actionDatabase);
-        Logger.info("Upyun OSS is in use.");
+        try {
+            loadActionDatabase(actionDatabase);
+            Logger.info("Upyun OSS in use.");
+        } catch (Exception e) {
+            Logger.warn("Use Upyun OSS failed.");
+        }
     }
 
     /**
@@ -45,7 +49,8 @@ public class ActionExecutor {
     }
 
     public void shutdown() {
-        actionProcessor = null;
+        actionProcessor.shutdown();
+        Logger.info("Shutdown OK.");
     }
 
 }

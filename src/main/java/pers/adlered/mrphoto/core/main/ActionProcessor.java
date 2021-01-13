@@ -20,7 +20,11 @@ public class ActionProcessor {
 
     // 设置变量
     public void setVal(String val) {
-        actionDatabase.setVal(val);
+        try {
+            actionDatabase.setVal(val);
+        } catch (Exception e) {
+            Logger.warn("SetVal action failed.");
+        }
     }
 
     // 创建空文件/文件夹
@@ -28,13 +32,18 @@ public class ActionProcessor {
         if (path.endsWith("/")) {
             path = path.substring(0, path.length() - 1);
         }
-        actionDatabase.create(path, filename, isFile);
+        try {
+            actionDatabase.create(path, filename, isFile);
+        } catch (Exception e) {
+            Logger.warn("Create action failed.");
+        }
         return false;
     }
 
     // 关闭线程
     public void shutdown() {
         actionDatabase.shutdown();
+        actionDatabase = null;
     }
 
     /**
