@@ -24,9 +24,17 @@ public class ActionProcessor {
     }
 
     // 创建空文件/文件夹
-    public boolean create(String path, String filename) {
-        actionDatabase.create(path, filename);
+    public boolean create(String path, String filename, boolean isFile) {
+        if (path.endsWith("/")) {
+            path = path.substring(0, path.length() - 1);
+        }
+        actionDatabase.create(path, filename, isFile);
         return false;
+    }
+
+    // 关闭线程
+    public void shutdown() {
+        actionDatabase.shutdown();
     }
 
     /**

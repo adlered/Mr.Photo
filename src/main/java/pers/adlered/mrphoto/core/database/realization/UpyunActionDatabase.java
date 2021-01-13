@@ -1,8 +1,10 @@
 package pers.adlered.mrphoto.core.database.realization;
 
 import com.upyun.RestManager;
+import okhttp3.Response;
 import pers.adlered.mrphoto.core.bean.Prop;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
+import pers.adlered.mrphoto.core.main.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,23 +15,34 @@ import java.util.ArrayList;
  */
 public class UpyunActionDatabase implements ActionDatabase {
 
-    private RestManager restManager;
+    private RestManager manager;
 
     @Override
     public void setVal(String val) {
         // 初始化
         String[] valOfArr = val.split("\n");
-        restManager = new RestManager(valOfArr[0], valOfArr[1], valOfArr[2]);
-
+        manager = new RestManager(valOfArr[0], valOfArr[1], valOfArr[2]);
+        Logger.info("Init upyun val: " + valOfArr[0] + ", " + valOfArr[1] + ", " + valOfArr[2]);
     }
 
     @Override
-    public boolean create(String path, String filename) {
-        return false;
+    public boolean create(String path, String filename, boolean isFile) {
+        if (isFile) {
+            return false;
+        } else {
+            try {
+                String fullPath = path + "/" + filename;
+                Response result = manager.mkDir(fullPath);
+                Logger.info("Folder " + fullPath + " created: " + result.code());
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
     }
 
     @Override
-    public boolean delete(String path, String filename) {
+    public boolean delete(String path, String filename, boolean isFile) {
         return false;
     }
 
@@ -49,12 +62,12 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public boolean move(String path, String filename, String newPath, String newFilename) {
+    public boolean move(String path, String filename, String newPath, String newFilename, boolean isFile) {
         return false;
     }
 
     @Override
-    public boolean copy(String path, String filename, String newPath, String newFilename) {
+    public boolean copy(String path, String filename, String newPath, String newFilename, boolean isFile) {
         return false;
     }
 
@@ -66,5 +79,10 @@ public class UpyunActionDatabase implements ActionDatabase {
     @Override
     public String getURL(String path, String filename) {
         return null;
+    }
+
+    @Override
+    public void shutdown() {
+        manager = null;
     }
 }

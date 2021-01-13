@@ -17,7 +17,7 @@ import pers.adlered.mrphoto.core.database.realization.UpyunActionDatabase;
 public class ActionExecutor {
 
     // ActionProcessor 必须由 ActionExecutor 进行实例化和控制
-    private final ActionProcessor actionProcessor = new ActionProcessor();
+    private ActionProcessor actionProcessor = new ActionProcessor();
 
     // 修改 ActionDatabase 使用的行为数据库（切换OSS）
     private void loadActionDatabase(ActionDatabase actionDatabase) throws IllegalAccessException, InstantiationException {
@@ -32,6 +32,7 @@ public class ActionExecutor {
     public void setActionDatabaseToUpyun() throws InstantiationException, IllegalAccessException {
         ActionDatabase actionDatabase = new UpyunActionDatabase();
         loadActionDatabase(actionDatabase);
+        Logger.info("Upyun OSS is in use.");
     }
 
     /**
@@ -41,6 +42,10 @@ public class ActionExecutor {
      */
     public ActionProcessor getActionProcessor() {
         return actionProcessor;
+    }
+
+    public void shutdown() {
+        actionProcessor = null;
     }
 
 }
