@@ -1,23 +1,30 @@
 package pers.adlered.mrphoto.core.database.realization;
 
+import com.upyun.RestManager;
 import pers.adlered.mrphoto.core.bean.Prop;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
 
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * 又拍云行为数据库。
+ * 函数要求：空间名称\n操作员名城\n操作员密码
+ */
 public class UpyunActionDatabase implements ActionDatabase {
 
-    private String val;
+    private RestManager restManager;
 
     @Override
     public void setVal(String val) {
-        this.val = val;
+        // 初始化
+        String[] valOfArr = val.split("\n");
+        restManager = new RestManager(valOfArr[0], valOfArr[1], valOfArr[2]);
+
     }
 
     @Override
     public boolean create(String path, String filename) {
-        System.out.println("val is: " + val);
         return false;
     }
 
