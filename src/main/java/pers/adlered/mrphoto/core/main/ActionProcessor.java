@@ -34,10 +34,11 @@ public class ActionProcessor {
         }
         try {
             actionDatabase.create(path, filename, isFile);
+            return true;
         } catch (Exception e) {
             Logger.warn("Create action failed.");
+            return false;
         }
-        return false;
     }
 
     // 关闭线程
