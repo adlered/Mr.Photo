@@ -29,6 +29,9 @@ public class ActionProcessor {
 
     // 创建空文件/文件夹
     public boolean create(String path, String filename, boolean isFile) {
+        path = path.replaceAll("\\\\", "/");
+        filename = filename.replaceAll("\\\\", "")
+                .replaceAll("/", "");
         if (path.endsWith("/")) {
             path = path.substring(0, path.length() - 1);
         }

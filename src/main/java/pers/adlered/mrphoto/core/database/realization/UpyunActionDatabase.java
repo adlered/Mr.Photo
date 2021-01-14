@@ -8,6 +8,8 @@ import pers.adlered.mrphoto.core.main.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 又拍云行为数据库。
@@ -28,7 +30,15 @@ public class UpyunActionDatabase implements ActionDatabase {
     @Override
     public boolean create(String path, String filename, boolean isFile) {
         if (isFile) {
-            return false;
+            try {
+                String fullPath = path + "/" + filename;
+                Map<String, String> params = new HashMap<String, String>();
+                Response result = manager.writeFile(fullPath, new byte[0], params);
+                Logger.info("Empty file " + fullPath + " created: " + result.code());
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
         } else {
             try {
                 String fullPath = path + "/" + filename;
