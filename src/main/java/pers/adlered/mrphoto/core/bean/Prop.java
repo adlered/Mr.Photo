@@ -7,23 +7,29 @@ public class Prop {
     // 上一次修改时间的时间戳
     Long lastDate;
     // 文件大小
-    Float size;
-
-    public Prop(String filename, Long lastDate, Float size) {
-        this.filename = filename;
-        this.lastDate = lastDate;
-        this.size = size;
-    }
+    Long size;
 
     public String getFilename() {
         return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public Long getLastDate() {
         return lastDate;
     }
 
-    public Float getSize() {
+    public void setLastDate(Long lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public Long getSize() {
         return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 }

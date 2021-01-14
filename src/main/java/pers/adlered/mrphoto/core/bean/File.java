@@ -6,16 +6,14 @@ package pers.adlered.mrphoto.core.bean;
  */
 public class File {
 
-    private boolean isDirectory = false;
+    // 文件名
     private String filename = "";
-
-    public boolean isDirectory() {
-        return isDirectory;
-    }
-
-    public void setDirectory(boolean directory) {
-        isDirectory = directory;
-    }
+    // 是否为文件夹
+    private boolean imDirectory = false;
+    // 上一次修改时间的时间戳
+    Long lastDate;
+    // 文件大小
+    Long size;
 
     public String getFilename() {
         return filename;
@@ -23,5 +21,29 @@ public class File {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public boolean isImDirectory() {
+        return imDirectory;
+    }
+
+    public void setImDirectory(boolean imDirectory) {
+        this.imDirectory = imDirectory;
+    }
+
+    public Long getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Long lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 }

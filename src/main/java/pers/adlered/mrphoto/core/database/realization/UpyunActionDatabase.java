@@ -84,7 +84,9 @@ public class UpyunActionDatabase implements ActionDatabase {
                 JSONObject object = fileListArray.getJSONObject(i);
                 pers.adlered.mrphoto.core.bean.File file = new pers.adlered.mrphoto.core.bean.File();
                 file.setFilename(object.getString("name"));
-                file.setDirectory(object.getString("type").equals("folder"));
+                file.setImDirectory(object.getString("type").equals("folder"));
+                file.setLastDate(object.getLong("last_modified"));
+                file.setSize(object.getLong("length"));
                 fileList.add(file);
             }
 
