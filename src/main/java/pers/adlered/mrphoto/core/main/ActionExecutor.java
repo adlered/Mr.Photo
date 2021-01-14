@@ -17,10 +17,10 @@ import pers.adlered.mrphoto.core.database.realization.UpyunActionDatabase;
 public class ActionExecutor {
 
     // ActionProcessor 必须由 ActionExecutor 进行实例化和控制
-    private ActionProcessor actionProcessor = new ActionProcessor();
+    private final ActionProcessor actionProcessor = new ActionProcessor();
 
     // 修改 ActionDatabase 使用的行为数据库（切换OSS）
-    private void loadActionDatabase(ActionDatabase actionDatabase) throws IllegalAccessException, InstantiationException {
+    private void loadActionDatabase(ActionDatabase actionDatabase) {
         actionProcessor.cActionDatabase(actionDatabase);
     }
 

@@ -34,7 +34,7 @@ public class UpyunActionDatabase implements ActionDatabase {
                 String fullPath = path + "/" + filename;
                 Map<String, String> params = new HashMap<>();
                 Response result = manager.writeFile(fullPath, new byte[0], params);
-                Logger.info("Empty file " + fullPath + " created: " + result.code());
+                Logger.info("Empty file " + fullPath + " [created] " + result.code());
                 return true;
             } catch (Exception e) {
                 return false;
@@ -43,7 +43,7 @@ public class UpyunActionDatabase implements ActionDatabase {
             try {
                 String fullPath = path + "/" + filename;
                 Response result = manager.mkDir(fullPath);
-                Logger.info("Folder " + fullPath + " created: " + result.code());
+                Logger.info("Folder " + fullPath + " [created] " + result.code());
                 return true;
             } catch (Exception e) {
                 return false;
