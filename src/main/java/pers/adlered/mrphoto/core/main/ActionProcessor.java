@@ -1,6 +1,9 @@
 package pers.adlered.mrphoto.core.main;
 
+import pers.adlered.mrphoto.core.bean.File;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
+
+import java.util.ArrayList;
 
 public class ActionProcessor {
 
@@ -31,11 +34,21 @@ public class ActionProcessor {
             path = path.substring(0, path.length() - 1);
         }
         try {
-            actionDatabase.create(path, filename, isFile);
-            return true;
+            return actionDatabase.create(path, filename, isFile);
         } catch (Exception e) {
             Logger.warn("Create action failed.");
             return false;
+        }
+    }
+
+    // 获取文件列表
+    public ArrayList<File> fetch(String path) {
+        path = path.replaceAll("\\\\", "/");
+        try {
+            return actionDatabase.fetch(path);
+        } catch (Exception e) {
+            Logger.warn("Fetch action failed.");
+            return null;
         }
     }
 

@@ -1,5 +1,7 @@
 package pers.adlered.mrphoto.core.database.realization;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.upyun.RestManager;
 import okhttp3.Response;
 import pers.adlered.mrphoto.core.bean.Prop;
@@ -67,8 +69,28 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public ArrayList<pers.adlered.mrphoto.core.bean.File[]> fetch(String path) {
-        return null;
+    public ArrayList<pers.adlered.mrphoto.core.bean.File> fetch(String path) {
+        try {
+            Map<String, String> params = new HashMap<>();
+            params.put("Accept", "application/json");
+            params.put("x-list-limit", "10000");
+            Response response = manager.readDirIter(path, params);
+            ArrayList<pers.adlered.mrphoto.core.bean.File> fileList = new ArrayList<>();
+
+            JSONObject fileListJson = JSONObject.parseObject(response.body() != null ? response.body().string() : "");
+            JSONArray fileListArray = fileListJson.getJSONArray("files");
+            for (int i = 0; i < fileListArray.size(); i++) {
+                JSONObject object = fileListArray.getJSONObject(i);
+                pers.adlered.mrphoto.core.bean.File file = new pers.adlered.mrphoto.core.bean.File();
+                file.setFilename(object.getString("name"));
+                file.setDirectory(object.getString("type").equals("folder"));
+                fileList.add(file);
+            }
+
+            return fileList;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

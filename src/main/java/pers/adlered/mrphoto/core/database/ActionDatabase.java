@@ -17,7 +17,7 @@ public interface ActionDatabase {
     // 获取文件属性
     Prop prop(String path, String filename);
     // 获取当前目录文件列表
-    ArrayList<pers.adlered.mrphoto.core.bean.File[]> fetch(String path);
+    ArrayList<pers.adlered.mrphoto.core.bean.File> fetch(String path);
     // 移动文件或文件夹
     boolean move(String path, String filename, String newPath, String newFilename, boolean isFile);
     // 复制文件或文件夹

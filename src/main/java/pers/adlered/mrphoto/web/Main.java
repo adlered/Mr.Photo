@@ -8,19 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import pers.adlered.mrphoto.core.main.ActionExecutor;
 
 @RestController
-public class Test {
+public class Main {
 
     ActionExecutor actionExecutor = new ActionExecutor();
 
-    public Test() {
+    public Main() {
         actionExecutor.setActionDatabaseToUpyun();
         actionExecutor.getActionProcessor().setVal("test-netdisk-adler\ntemp\n7m6L2J4YZwJ1kOzzTqOc8eHyGvEuu0BD");
         System.out.println("Setup success.");
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "hello";
     }
 
     @RequestMapping(value = "/api/create", method = RequestMethod.POST)
@@ -29,5 +24,11 @@ public class Test {
                          @RequestParam("isFile") boolean isFile) {
         boolean result = actionExecutor.getActionProcessor().create(path, filename, isFile);
         return result ? new JSONObject().put("status", "200").toString() : new JSONObject().put("status", "500").toString();
+    }
+
+    @RequestMapping(value = "/api/fetch", method = RequestMethod.POST)
+    public String fetch(@RequestParam("path") String path) {
+        actionExecutor.getActionProcessor().fetch(path);
+        return new JSONObject().put("status", "200").toString();
     }
 }
