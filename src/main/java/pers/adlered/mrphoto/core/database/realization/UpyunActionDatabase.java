@@ -32,7 +32,7 @@ public class UpyunActionDatabase implements ActionDatabase {
         if (isFile) {
             try {
                 String fullPath = path + "/" + filename;
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 Response result = manager.writeFile(fullPath, new byte[0], params);
                 Logger.info("Empty file " + fullPath + " created: " + result.code());
                 return true;
