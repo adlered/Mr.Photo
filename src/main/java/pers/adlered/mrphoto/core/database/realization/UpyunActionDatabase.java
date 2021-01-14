@@ -77,6 +77,7 @@ public class UpyunActionDatabase implements ActionDatabase {
             Response response = manager.readDirIter(path, params);
             ArrayList<pers.adlered.mrphoto.core.bean.File> fileList = new ArrayList<>();
 
+            // JSON处理
             JSONObject fileListJson = JSONObject.parseObject(response.body() != null ? response.body().string() : "");
             JSONArray fileListArray = fileListJson.getJSONArray("files");
             for (int i = 0; i < fileListArray.size(); i++) {

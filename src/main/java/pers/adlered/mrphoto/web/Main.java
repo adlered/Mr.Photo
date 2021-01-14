@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pers.adlered.mrphoto.core.bean.File;
 import pers.adlered.mrphoto.core.main.ActionExecutor;
+
+import java.util.ArrayList;
 
 @RestController
 public class Main {
@@ -28,7 +31,8 @@ public class Main {
 
     @RequestMapping(value = "/api/fetch", method = RequestMethod.POST)
     public String fetch(@RequestParam("path") String path) {
-        actionExecutor.getActionProcessor().fetch(path);
-        return new JSONObject().put("status", "200").toString();
+        ArrayList<File> fileList = actionExecutor.getActionProcessor().fetch(path);
+        return new JSONObject().put("status", "200")
+                .put("result", fileList).toString();
     }
 }
