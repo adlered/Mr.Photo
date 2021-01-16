@@ -11,7 +11,7 @@ public interface ActionDatabase {
     // 删除指定文件或文件夹
     boolean delete(String path, String filename, boolean isFile);
     // 上传文件
-    boolean upload(java.io.File file, String path, String filename);
+    boolean upload(java.io.File file, String path);
     // 获取文件属性
     pers.adlered.mrphoto.core.bean.File prop(String path, String filename);
     // 获取当前目录文件列表

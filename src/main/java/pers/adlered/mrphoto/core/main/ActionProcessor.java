@@ -27,7 +27,7 @@ public class ActionProcessor {
 
     // 创建空文件/文件夹
     public boolean create(String path, String filename, boolean isFile) {
-        path = formatPath(path);
+        path = formatPath(path, false);
         filename = formatFilename(filename);
         try {
             return actionDatabase.create(path, filename, isFile);
@@ -39,7 +39,7 @@ public class ActionProcessor {
 
     // 删除文件或文件夹
     public boolean delete(String path, String filename, boolean isFile) {
-        path = formatPath(path);
+        path = formatPath(path, false);
         filename = formatFilename(filename);
         try {
             return actionDatabase.delete(path, filename, isFile);
@@ -49,9 +49,19 @@ public class ActionProcessor {
         }
     }
 
+    public boolean upload(java.io.File file, String path) {
+        path = formatPath(path, true);
+        try {
+            return actionDatabase.upload(file, path);
+        } catch (Exception e) {
+            Logger.warn("Upload action failed.");
+            return false;
+        }
+    }
+
     // 获取文件列表
     public ArrayList<File> fetch(String path) {
-        path = formatPath(path);
+        path = formatPath(path, true);
         try {
             return actionDatabase.fetch(path);
         } catch (Exception e) {
@@ -61,10 +71,15 @@ public class ActionProcessor {
     }
 
     // 格式化目录
-    private String formatPath(String path) {
+    private String formatPath(String path, boolean ifEmptyKeepSlash) {
         path = path.replaceAll("\\\\", "/");
         if (path.endsWith("/")) {
             path = path.substring(0, path.length() - 1);
+        }
+        if (ifEmptyKeepSlash) {
+            if (path.isEmpty()) {
+                path = "/";
+            }
         }
         return path;
     }

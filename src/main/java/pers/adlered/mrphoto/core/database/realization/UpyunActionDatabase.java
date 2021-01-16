@@ -3,10 +3,12 @@ package pers.adlered.mrphoto.core.database.realization;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.upyun.RestManager;
+import com.upyun.UpYunUtils;
 import okhttp3.Response;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
 import pers.adlered.mrphoto.core.main.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,8 +77,16 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public boolean upload(java.io.File file, String path, String filename) {
-        return false;
+    public boolean upload(java.io.File file, String path) {
+        try {
+            String fullPath = path + "/" + file.getName();
+            Response response = manager.writeFile(fullPath, file, null);
+            Logger.info("File " + fullPath + " [uploaded] " + response.code());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
