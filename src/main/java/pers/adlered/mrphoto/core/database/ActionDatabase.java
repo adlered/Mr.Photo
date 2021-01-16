@@ -15,6 +15,7 @@ public interface ActionDatabase {
     // 获取文件属性
     pers.adlered.mrphoto.core.bean.File prop(String path, String filename);
     // 获取当前目录文件列表
+    // 要求： lastDate 为 10 位时间戳
     ArrayList<pers.adlered.mrphoto.core.bean.File> fetch(String path);
     // 移动文件或文件夹
     boolean move(String path, String filename, String newPath, String newFilename, boolean isFile);
