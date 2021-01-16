@@ -53,7 +53,25 @@ public class UpyunActionDatabase implements ActionDatabase {
 
     @Override
     public boolean delete(String path, String filename, boolean isFile) {
-        return false;
+        if (isFile) {
+            try {
+                String fullPath = path + "/" + filename;
+                Response response = manager.deleteFile(fullPath, null);
+                Logger.info("File " + fullPath + " [deleted] " + response.code());
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            try {
+                String fullPath = path + "/" + filename;
+                Response response = manager.rmDir(fullPath);
+                Logger.info("Folder " + fullPath + " [deleted] " + response.code());
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
     }
 
     @Override

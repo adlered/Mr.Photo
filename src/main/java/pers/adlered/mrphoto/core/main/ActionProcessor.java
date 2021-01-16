@@ -27,12 +27,8 @@ public class ActionProcessor {
 
     // 创建空文件/文件夹
     public boolean create(String path, String filename, boolean isFile) {
-        path = path.replaceAll("\\\\", "/");
-        filename = filename.replaceAll("\\\\", "")
-                .replaceAll("/", "");
-        if (path.endsWith("/")) {
-            path = path.substring(0, path.length() - 1);
-        }
+        path = formatPath(path);
+        filename = formatFilename(filename);
         try {
             return actionDatabase.create(path, filename, isFile);
         } catch (Exception e) {
@@ -41,15 +37,43 @@ public class ActionProcessor {
         }
     }
 
+    // 删除文件或文件夹
+    public boolean delete(String path, String filename, boolean isFile) {
+        path = formatPath(path);
+        filename = formatFilename(filename);
+        try {
+            return actionDatabase.delete(path, filename, isFile);
+        } catch (Exception e) {
+            Logger.warn("Delete action failed.");
+            return false;
+        }
+    }
+
     // 获取文件列表
     public ArrayList<File> fetch(String path) {
-        path = path.replaceAll("\\\\", "/");
+        path = formatPath(path);
         try {
             return actionDatabase.fetch(path);
         } catch (Exception e) {
             Logger.warn("Fetch action failed.");
             return null;
         }
+    }
+
+    // 格式化目录
+    private String formatPath(String path) {
+        path = path.replaceAll("\\\\", "/");
+        if (path.endsWith("/")) {
+            path = path.substring(0, path.length() - 1);
+        }
+        return path;
+    }
+
+    // 格式化文件名
+    private String formatFilename(String filename) {
+        filename = filename.replaceAll("\\\\", "")
+                .replaceAll("/", "");
+        return filename;
     }
 
     // 关闭线程
