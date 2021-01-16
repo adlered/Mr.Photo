@@ -29,6 +29,14 @@ public class Main {
         return result ? new JSONObject().put("status", "200").toString() : new JSONObject().put("status", "500").toString();
     }
 
+    @RequestMapping(value = "/api/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam("path") String path,
+                         @RequestParam("filename") String filename,
+                         @RequestParam("isFile") boolean isFile) {
+        boolean result = actionExecutor.getActionProcessor().delete(path, filename, isFile);
+        return result ? new JSONObject().put("status", "200").toString() : new JSONObject().put("status", "500").toString();
+    }
+
     @RequestMapping(value = "/api/fetch", method = RequestMethod.POST)
     public String fetch(@RequestParam("path") String path) {
         ArrayList<File> fileList = actionExecutor.getActionProcessor().fetch(path);
