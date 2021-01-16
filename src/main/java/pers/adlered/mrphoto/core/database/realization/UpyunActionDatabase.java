@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.upyun.RestManager;
 import okhttp3.Response;
-import pers.adlered.mrphoto.core.bean.Prop;
 import pers.adlered.mrphoto.core.database.ActionDatabase;
 import pers.adlered.mrphoto.core.main.Logger;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,12 +57,12 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public boolean upload(File file, String path, String filename) {
+    public boolean upload(java.io.File file, String path, String filename) {
         return false;
     }
 
     @Override
-    public Prop prop(String path, String filename) {
+    public pers.adlered.mrphoto.core.bean.File prop(String path, String filename) {
         return null;
     }
 
@@ -107,7 +105,7 @@ public class UpyunActionDatabase implements ActionDatabase {
     }
 
     @Override
-    public File download(String path, String filename) {
+    public java.io.File download(String path, String filename) {
         return null;
     }
 
